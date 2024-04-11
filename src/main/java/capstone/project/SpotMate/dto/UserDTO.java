@@ -21,4 +21,8 @@ public class UserDTO {
 
     private String name;
 
+    private String ph_num;
+
+    private String address;
+
 }
