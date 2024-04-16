@@ -14,8 +14,4 @@ public class TestController {
 
     @GetMapping("/test2")
     public String test2() { return "jenkins 해결해줘"; }
-
-    @GetMapping("/test3")
-    public String test3() { return "최종 확인"; }
-
 }
