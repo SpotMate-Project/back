@@ -71,6 +71,22 @@ public class UserController {
         return ResponseEntity.ok(apiResponse);
     }
 
+    @PostMapping("/validation/nickname")
+    public ResponseEntity<ApiResponse> validatenickname(@RequestBody UserDTO user){
+        ApiResponse apiResponse = new ApiResponse();
+        if(!Validation.isValidNickname(user.getNickname())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("닉네임은 한글이나 영문 또는 숫자 조합으로 3~8자 이어야 합니다.");
+        } else if (userService.isNicknameDuplicated(user.getNickname())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("이미 등록된 닉네임입니다.");
+        } else{
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("사용 가능한 닉네임입니다.");
+        }
+        return ResponseEntity.ok(apiResponse);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<ApiResponse> login(@RequestBody LoginDTO user ){
         ApiResponse apiResponse = new ApiResponse();
