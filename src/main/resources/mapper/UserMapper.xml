@@ -13,4 +13,8 @@
         SELECT count(*) > 0 from user WHERE email =#{email}
     </select>
 
+    <select id="nicknameExists" resultType="boolean">
+        SELECT count(*) > 0 from user WHERE nickname =#{nickname}
+    </select>
+
 </mapper>
