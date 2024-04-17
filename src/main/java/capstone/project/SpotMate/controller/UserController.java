@@ -58,6 +58,19 @@ public class UserController {
         return ResponseEntity.ok(apiResponse);
     }
 
+    @PostMapping("/validation/passwordCheck")
+    public ResponseEntity<ApiResponse> checkPassword(@RequestBody UserDTO user){
+        ApiResponse apiResponse = new ApiResponse();
+        if(!Validation.PasswordCheck(user.getPassword(),user.getPasswordCheck())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("비밀번호가 일치하지 않습니다.");
+        } else{
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("비밀번호 일치!!");
+        }
+        return ResponseEntity.ok(apiResponse);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<ApiResponse> login(@RequestBody LoginDTO user ){
         ApiResponse apiResponse = new ApiResponse();
