@@ -22,7 +22,7 @@ public class UserController {
         this.userService=userService;
     }
 
-    @PostMapping("validation/email")
+    @PostMapping("/validation/email")
     public ResponseEntity<ApiResponse> validateEmail(@RequestBody UserDTO user){
         ApiResponse apiResponse = new ApiResponse();
         if(!Validation.isValidEmail(user.getEmail())){
@@ -35,6 +35,19 @@ public class UserController {
         else {
             apiResponse.setSuccess(true);
             apiResponse.setMessage("사용 가능한 이메일입니다.");
+        }
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @PostMapping("/validation/password")
+    public ResponseEntity<ApiResponse> validatePassword(@RequestBody UserDTO user){
+        ApiResponse apiResponse = new ApiResponse();
+        if(!Validation.isValidPassword(user.getPassword())){
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("비밀번호는 영문,숫자,특수문자의 조합으로 8자 이상이어야 합니다.");
+        }else{
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("유효한 비밀번호입니다.");
         }
         return ResponseEntity.ok(apiResponse);
     }
