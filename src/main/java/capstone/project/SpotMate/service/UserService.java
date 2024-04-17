@@ -15,6 +15,10 @@ public class UserService {
         this.passwordEncoderSHA512 = passwordEncoderSHA512;
     }
 
+    public boolean isEmailDuplicated(String email){
+        return userMapper.emailExists(email);
+    }
+
     public void signup(UserDTO user){
         String plaintext = user.getEmail() + user.getPassword();
         String hashpassword = passwordEncoderSHA512.encode(plaintext);
