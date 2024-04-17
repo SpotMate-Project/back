@@ -2,10 +2,13 @@ package capstone.project.SpotMate.controller;
 
 import capstone.project.SpotMate.configure.utils.Validation;
 import capstone.project.SpotMate.configure.utils.response.ApiResponse;
+import capstone.project.SpotMate.dto.LoginDTO;
 import capstone.project.SpotMate.dto.UserDTO;
+import capstone.project.SpotMate.service.LoginService;
 import capstone.project.SpotMate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +20,13 @@ public class UserController {
 
     private UserService userService;
 
+    private LoginService loginService;
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, LoginService loginService){
         this.userService=userService;
+        this.loginService=loginService;
     }
+
 
     @PostMapping("validation/email")
     public ResponseEntity<ApiResponse> validateEmail(@RequestBody UserDTO user){
@@ -38,6 +44,21 @@ public class UserController {
         }
         return ResponseEntity.ok(apiResponse);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse> login(@RequestBody LoginDTO user ){
+        ApiResponse apiResponse = new ApiResponse();
+        if(loginService.checkLogin(user)){
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("로그인 성공");
+        } else {
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("이메일 또는 비밀번호가 일치하지않습니다.");
+        }
+        return ResponseEntity.ok(apiResponse);
+    }
+
+
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse> signup(@RequestBody UserDTO user){
         ApiResponse apiResponse = new ApiResponse();
