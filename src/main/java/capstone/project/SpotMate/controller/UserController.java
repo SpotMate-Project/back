@@ -58,6 +58,35 @@ public class UserController {
         return ResponseEntity.ok(apiResponse);
     }
 
+    @PostMapping("/validation/passwordCheck")
+    public ResponseEntity<ApiResponse> checkPassword(@RequestBody UserDTO user){
+        ApiResponse apiResponse = new ApiResponse();
+        if(!Validation.PasswordCheck(user.getPassword(),user.getPasswordCheck())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("비밀번호가 일치하지 않습니다.");
+        } else{
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("비밀번호 일치!!");
+        }
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @PostMapping("/validation/nickname")
+    public ResponseEntity<ApiResponse> validatenickname(@RequestBody UserDTO user){
+        ApiResponse apiResponse = new ApiResponse();
+        if(!Validation.isValidNickname(user.getNickname())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("닉네임은 한글이나 영문 또는 숫자 조합으로 3~8자 이어야 합니다.");
+        } else if (userService.isNicknameDuplicated(user.getNickname())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("이미 등록된 닉네임입니다.");
+        } else{
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("사용 가능한 닉네임입니다.");
+        }
+        return ResponseEntity.ok(apiResponse);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<ApiResponse> login(@RequestBody LoginDTO user ){
         ApiResponse apiResponse = new ApiResponse();
@@ -75,13 +104,28 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse> signup(@RequestBody UserDTO user){
         ApiResponse apiResponse = new ApiResponse();
-        try {
+        if(!Validation.isValidEmail(user.getEmail())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("유효하지 않는 이메일 형식입니다.");
+        } else if (!Validation.isValidPassword(user.getPassword())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("비밀번호는 영문,숫자,특수문자의 조합으로 8자 이상이어야 합니다.");
+        } else if (!Validation.isValidNickname(user.getNickname())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("닉네임은 한글이나 영문 또는 숫자 조합으로 3~8자 이어야합니다.");
+        } else if (userService.isEmailDuplicated(user.getEmail())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("이미 등록된 이메일입니다.");
+        } else if (userService.isNicknameDuplicated(user.getNickname())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("이미 사용중인 닉네입니다.");
+        } else if (!Validation.PasswordCheck(user.getPassword(), user.getPasswordCheck())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("비밀번호와비밀번호확인이 일치하지 않습니다");
+        } else{
             userService.signup(user);
             apiResponse.setSuccess(true);
             apiResponse.setMessage("회원가입이 완료되었습니다.");
-        } catch (Exception e) {
-            apiResponse.setSuccess(false);
-            apiResponse.setMessage("회원가입에 실패하였습니다.");
         }
         return ResponseEntity.ok(apiResponse);
     }

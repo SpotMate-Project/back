@@ -10,4 +10,5 @@ public interface UserMapper {
    void signup(UserDTO user);
 
    boolean emailExists(String email);
+   boolean nicknameExists(String nickname);
 }

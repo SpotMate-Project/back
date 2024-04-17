@@ -19,6 +19,10 @@ public class UserService {
         return userMapper.emailExists(email);
     }
 
+    public boolean isNicknameDuplicated(String nickname){
+        return userMapper.nicknameExists(nickname);
+    }
+
     public void signup(UserDTO user){
         String plaintext = user.getEmail() + user.getPassword();
         String hashpassword = passwordEncoderSHA512.encode(plaintext);
