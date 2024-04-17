@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
    void signup(UserDTO user);
 
+   boolean emailExists(String email);
 }

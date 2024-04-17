@@ -9,4 +9,8 @@
             values (#{email},#{password},#{name},#{ph_num},#{address})
     </insert>
 
+    <select id="emailExists" resultType="boolean">
+        SELECT count(*) > 0 from user WHERE email =#{email}
+    </select>
+
 </mapper>

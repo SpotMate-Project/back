@@ -1,5 +1,6 @@
 package capstone.project.SpotMate.controller;
 
+import capstone.project.SpotMate.configure.utils.Validation;
 import capstone.project.SpotMate.configure.utils.response.ApiResponse;
 import capstone.project.SpotMate.dto.LoginDTO;
 import capstone.project.SpotMate.dto.UserDTO;
@@ -26,6 +27,24 @@ public class UserController {
         this.loginService=loginService;
     }
 
+
+    @PostMapping("validation/email")
+    public ResponseEntity<ApiResponse> validateEmail(@RequestBody UserDTO user){
+        ApiResponse apiResponse = new ApiResponse();
+        if(!Validation.isValidEmail(user.getEmail())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("이메일 형식을 확인하여주세요.");
+        } else if (userService.isEmailDuplicated(user.getEmail())){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("이미 등록된 이메일입니다.");
+        }
+        else {
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("사용 가능한 이메일입니다.");
+        }
+        return ResponseEntity.ok(apiResponse);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<ApiResponse> login(@RequestBody LoginDTO user ){
         ApiResponse apiResponse = new ApiResponse();
@@ -38,6 +57,7 @@ public class UserController {
         }
         return ResponseEntity.ok(apiResponse);
     }
+
 
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse> signup(@RequestBody UserDTO user){
