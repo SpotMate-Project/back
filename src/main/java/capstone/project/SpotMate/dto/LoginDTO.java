@@ -14,4 +14,6 @@ public class LoginDTO {
     public String email =null;
 
     public String password =null;
+
+    public int state;
 }
