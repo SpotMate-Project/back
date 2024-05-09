@@ -93,7 +93,8 @@ public class UserController {
         if(loginService.checkLogin(user)){
             apiResponse.setSuccess(true);
             apiResponse.setMessage("로그인 성공");
-        } else {
+        }
+        else {
             apiResponse.setSuccess(false);
             apiResponse.setMessage("이메일 또는 비밀번호가 일치하지않습니다.");
         }
