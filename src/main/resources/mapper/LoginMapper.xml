@@ -5,7 +5,7 @@
 <mapper namespace="capstone.project.SpotMate.mapper.LoginMapper">
 
     <select id="findUserByEmail">
-        SELECT * FROM user where email = #{email} and state = #{state}
+        SELECT * FROM user where email = #{email}
     </select>
 
 
