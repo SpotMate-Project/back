@@ -17,9 +17,11 @@ public class LoginService {
 
     public boolean checkLogin(LoginDTO loginDTO){
         LoginDTO userDB = loginMapper.findUserByEmail(loginDTO.getEmail());
-        if(userDB!=null){
+        if(userDB!=null && userDB.state==1){
             return passwordEncoderSHA512.matches(loginDTO.getEmail().concat(loginDTO.getPassword()) , userDB.getPassword());
         }
         return false;
     }
+
+
 }
