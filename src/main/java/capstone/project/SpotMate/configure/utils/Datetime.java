@@ -1,4 +1,4 @@
-package blog.blovi.app.utils;
+package capstone.project.SpotMate.configure.utils;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
