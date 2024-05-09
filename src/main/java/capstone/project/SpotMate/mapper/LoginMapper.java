@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface LoginMapper {
 
     LoginDTO findUserByEmail(String email);
+
 }
