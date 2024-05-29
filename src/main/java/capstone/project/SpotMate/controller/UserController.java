@@ -2,8 +2,10 @@ package capstone.project.SpotMate.controller;
 
 import capstone.project.SpotMate.configure.utils.Validation;
 import capstone.project.SpotMate.configure.utils.response.ApiResponse;
+import capstone.project.SpotMate.configure.utils.response.UserResponse;
 import capstone.project.SpotMate.dto.LoginDTO;
 import capstone.project.SpotMate.dto.UserDTO;
+import capstone.project.SpotMate.dto.UserInfoDTO;
 import capstone.project.SpotMate.service.LoginService;
 import capstone.project.SpotMate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -102,6 +106,19 @@ public class UserController {
     }
 
 
+    @PostMapping("/info")
+    public ResponseEntity<UserResponse> userinfo(@RequestBody UserInfoDTO userInfoDTO){
+        List<UserInfoDTO> infos = userService.getinfo(new UserInfoDTO(null,userInfoDTO.getEmail(),null));
+
+        UserResponse userResponse = new UserResponse();
+        if(infos != null && !infos.isEmpty()){
+            userResponse.setSuccess(true);
+            userResponse.setData(infos);
+        } else {
+            userResponse.setSuccess(false);
+        }
+        return ResponseEntity.ok(userResponse);
+    }
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse> signup(@RequestBody UserDTO user){
         ApiResponse apiResponse = new ApiResponse();
