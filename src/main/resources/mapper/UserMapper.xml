@@ -20,4 +20,10 @@
     <select id="finduserinfo" resultType="capstone.project.SpotMate.dto.UserInfoDTO">
         SELECT id, email, nickname, imageUrl FROM user WHERE email = #{email}
     </select>
+
+    <update id="updateuserinfo" parameterType="UserInfoDTO">
+        UPDATE user
+        SET nickname = #{nickname},imageUrl = #{imageUrl}
+        WHERE email = #{email}
+    </update>
 </mapper>

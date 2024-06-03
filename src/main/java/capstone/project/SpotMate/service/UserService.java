@@ -37,6 +37,9 @@ public class UserService {
     public List<UserInfoDTO> getinfo(UserInfoDTO userInfoDTO){
         return userMapper.finduserinfo(userInfoDTO.getEmail());
     }
+    public void updateUserinfo(UserInfoDTO userInfoDTO){
+        userMapper.updateuserinfo(userInfoDTO);
+    }
 
     }
 

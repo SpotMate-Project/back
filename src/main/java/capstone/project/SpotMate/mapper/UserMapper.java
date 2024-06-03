@@ -16,4 +16,6 @@ public interface UserMapper {
    boolean nicknameExists(String nickname);
 
    List<UserInfoDTO> finduserinfo(String email);
+
+   void updateuserinfo(UserInfoDTO UserInfoDTO);
 }

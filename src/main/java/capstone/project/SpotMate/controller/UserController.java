@@ -11,10 +11,7 @@ import capstone.project.SpotMate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -144,6 +141,20 @@ public class UserController {
             userService.signup(user);
             apiResponse.setSuccess(true);
             apiResponse.setMessage("회원가입이 완료되었습니다.");
+        }
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<ApiResponse> updateUserinfo(@RequestBody UserInfoDTO userInfoDTO){
+        ApiResponse apiResponse = new ApiResponse();
+        try{
+            userService.updateUserinfo(userInfoDTO);
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("유저 정보 수정이 완료되었습니다.");
+        } catch (Exception e){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("유저 정보 수정에 실패하였습니다.");
         }
         return ResponseEntity.ok(apiResponse);
     }
