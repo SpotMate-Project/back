@@ -18,6 +18,6 @@
     </select>
 
     <select id="finduserinfo" resultType="capstone.project.SpotMate.dto.UserInfoDTO">
-        SELECT id, email, nickname FROM user WHERE email = #{email}
+        SELECT id, email, nickname, imageUrl FROM user WHERE email = #{email}
     </select>
 </mapper>

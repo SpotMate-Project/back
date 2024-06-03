@@ -26,7 +26,7 @@ public class UserDTO {
     private String ph_num;
 
     private String address;
-
+    private String imageUrl;
     private int state;
 
 }

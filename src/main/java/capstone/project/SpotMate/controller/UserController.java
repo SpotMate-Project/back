@@ -108,7 +108,7 @@ public class UserController {
 
     @PostMapping("/info")
     public ResponseEntity<UserResponse> userinfo(@RequestBody UserInfoDTO userInfoDTO){
-        List<UserInfoDTO> infos = userService.getinfo(new UserInfoDTO(null,userInfoDTO.getEmail(),null));
+        List<UserInfoDTO> infos = userService.getinfo(new UserInfoDTO(null,userInfoDTO.getEmail(),null ,null));
 
         UserResponse userResponse = new UserResponse();
         if(infos != null && !infos.isEmpty()){
