@@ -14,7 +14,7 @@ public interface InquiryMapper {
 
     List<InquiryDTO> findbyuserid(int user_id);
 
-    void repeatInquiry(InquiryDTO inquiryDTO);
+    void answerInquiry(InquiryDTO inquiryDTO);
 
     List<InquiryDTO> getAll(InquiryDTO inquiryDTO);
 

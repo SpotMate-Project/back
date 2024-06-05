@@ -1,5 +1,6 @@
 package capstone.project.SpotMate.controller;
 
+import capstone.project.SpotMate.configure.utils.response.ApiResponse;
 import capstone.project.SpotMate.configure.utils.response.InquiryResponse;
 import capstone.project.SpotMate.configure.utils.response.InquirySaveResponse;
 import capstone.project.SpotMate.dto.InquiryDTO;
@@ -50,6 +51,24 @@ public class InquiryController {
             apiResponse.setSuccess(false);
             apiResponse.setData(new ArrayList<>());
         }
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @PutMapping("/answer/{inquiry_id}")
+    public ResponseEntity<ApiResponse> repeatAnswer(@RequestBody InquiryDTO inquiryDTO){
+        ApiResponse apiResponse = new ApiResponse();
+
+        try{
+            inquiryService.updaterepeat(inquiryDTO);
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("답변완료");
+            System.out.println(inquiryDTO);
+        }catch (Exception e){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("답변에 실패하였습니다.");
+            System.out.println(inquiryDTO);
+        }
+
         return ResponseEntity.ok(apiResponse);
     }
 }

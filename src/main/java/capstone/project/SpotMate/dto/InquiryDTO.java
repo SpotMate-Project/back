@@ -16,5 +16,5 @@ public class InquiryDTO {
 
     public String body ;
 
-    public String repeat ;
+    public String answer ;
 }

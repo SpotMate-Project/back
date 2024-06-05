@@ -21,7 +21,7 @@ public class InquiryService {
     }
 
     public void updaterepeat(InquiryDTO inquiryDTO){
-        inquiryMapper.repeatInquiry(inquiryDTO);
+        inquiryMapper.answerInquiry(inquiryDTO);
     }
 
     public List<InquiryDTO> getInquiryid(InquiryDTO inquiryDTO){

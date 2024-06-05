@@ -18,16 +18,16 @@
         SELECT * FROM Inquiry WHERE user_id = #{user_id}
     </select>
 
-    <select id="findbybookid" resultType="capstone.project.SpotMate.dto.InquiryDTO">
-        SELECT * FROM Inquiry WHERE Inquiry_id = #{inquiry_id}
+    <select id="findbyInquiryid" resultType="capstone.project.SpotMate.dto.InquiryDTO">
+        SELECT * FROM Inquiry WHERE inquiry_id = #{inquiry_id}
     </select>
 
 
 
-    <update id="repeatInquiry" parameterType="InquiryDTO">
+    <update id="answerInquiry" parameterType="InquiryDTO">
         UPDATE Inquiry
-        SET repeat = #{repeat}
-        WHERE Inquiry_id = #{inquiry_id}
+        SET answer = #{answer}
+        WHERE inquiry_id = #{inquiry_id}
     </update>
 
 
