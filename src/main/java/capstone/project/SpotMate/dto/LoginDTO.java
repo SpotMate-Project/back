@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LoginDTO {
 
-    public String id= null;
+    public Integer id= null;
 
     public String email =null;
 
