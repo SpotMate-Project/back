@@ -18,7 +18,7 @@
     </select>
 
     <select id="finduserinfo" resultType="capstone.project.SpotMate.dto.UserInfoDTO">
-        SELECT id, email, nickname, imageUrl FROM user WHERE email = #{email}
+        SELECT id, email, nickname, imageUrl, state FROM user WHERE email = #{email}
     </select>
 
     <update id="updateuserinfo" parameterType="UserInfoDTO">

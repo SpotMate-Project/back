@@ -18,4 +18,6 @@ public class UserInfoDTO {
     private String nickname;
 
     private String imageUrl;
+
+    private Integer state;
 }
