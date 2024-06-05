@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="capstone.project.SpotMate.mapper.InquiryMapper">
+
+    <insert id="insertInquiry" parameterType="InquiryDTO" useGeneratedKeys="true" keyProperty="inquiry_id">
+        INSERT INTO Inquiry (user_id, title, body)
+        VALUES (#{user_id}, #{title}, #{body})
+    </insert>
+
+
+
+    <select id="findbyuserid" resultType="capstone.project.SpotMate.dto.InquiryDTO">
+        SELECT * FROM Inquiry WHERE user_id = #{user_id}
+    </select>
+
+    <select id="findbybookid" resultType="capstone.project.SpotMate.dto.InquiryDTO">
+        SELECT * FROM Inquiry WHERE Inquiry_id = #{inquiry_id}
+    </select>
+
+
+
+    <update id="repeatInquiry" parameterType="InquiryDTO">
+        UPDATE Inquiry
+        SET repeat = #{repeat}
+        WHERE Inquiry_id = #{inquiry_id}
+    </update>
+
+
+</mapper>
