@@ -9,6 +9,9 @@
         VALUES (#{user_id}, #{title}, #{body})
     </insert>
 
+    <select id="getAll" resultType="capstone.project.SpotMate.dto.InquiryDTO">
+        SELECT * FROM Inquiry
+    </select>
 
 
     <select id="findbyuserid" resultType="capstone.project.SpotMate.dto.InquiryDTO">
