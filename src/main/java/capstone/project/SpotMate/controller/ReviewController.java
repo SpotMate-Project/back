@@ -57,4 +57,20 @@ public class ReviewController {
         }
         return ResponseEntity.ok(apiResponse);
     }
+
+    @GetMapping("/{review_id}")
+    public ResponseEntity<ReviewResponse> readone (@PathVariable int review_id){
+        List<ReviewDTO> reviews = reviewService.getone(new ReviewDTO(review_id,null,null,null,null,null));
+
+        ReviewResponse reviewResponse = new ReviewResponse();
+        if(reviews != null && !reviews.isEmpty()){
+            reviewResponse.setSuccess(true);
+            reviewResponse.setData(reviews);
+        }else{
+            reviewResponse.setSuccess(false);
+            reviewResponse.setData(new ArrayList<>());
+        }
+
+        return ResponseEntity.ok(reviewResponse);
+    }
 }

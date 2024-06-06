@@ -19,6 +19,7 @@ public class ReviewService {
         return reviewMapper.findbyuserid(reviewDTO.getUser_id());
     }
 
+    public List<ReviewDTO> getone(ReviewDTO reviewDTO) { return reviewMapper.findbyreviewid(reviewDTO.getReview_id());}
     public List<ReviewDTO> getAll(ReviewDTO reviewDTO){
         return reviewMapper.getall(reviewDTO);
     }

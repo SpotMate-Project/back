@@ -5,7 +5,7 @@
 <mapper namespace="capstone.project.SpotMate.mapper.ReviewMapper">
 
     <insert id="insertReview" parameterType="ReviewDTO" useGeneratedKeys="true" keyProperty="review_id">
-        INSERT INTO review (user_id, title, body,created_at)
+        INSERT INTO review (user_id, title, body ,created_at)
         VALUES (#{user_id}, #{title}, #{body},#{created_at})
     </insert>
 
@@ -19,7 +19,7 @@
     </select>
 
     <select id="findbyreviewid" resultType="capstone.project.SpotMate.dto.ReviewDTO">
-        SELECT * FROM review WHERE inquiry_id = #{inquiry_id}
+        SELECT * FROM review WHERE review_id = #{review_id}
     </select>
 
 
