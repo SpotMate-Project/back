@@ -73,4 +73,20 @@ public class ReviewController {
 
         return ResponseEntity.ok(reviewResponse);
     }
+
+    @GetMapping("/myreview/{user_id}")
+    public ResponseEntity<ReviewResponse> myreviw (@PathVariable int user_id){
+        List<ReviewDTO> reviews = reviewService.getreview(new ReviewDTO(null,user_id,null,null,null,null));
+
+        ReviewResponse reviewResponse = new ReviewResponse();
+        if(reviews != null && !reviews.isEmpty()){
+            reviewResponse.setSuccess(true);
+            reviewResponse.setData(reviews);
+        }else{
+            reviewResponse.setSuccess(false);
+            reviewResponse.setData(new ArrayList<>());
+        }
+
+        return ResponseEntity.ok(reviewResponse);
+    }
 }
